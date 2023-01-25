@@ -1,6 +1,7 @@
 #ifndef App3D_HPP
 #define App3D_HPP
 #include <cmath>
+#include "drawText.cpp"
 #include "Sprite.hpp"
 class App3D;
 #include "Window.hpp"
@@ -45,8 +46,20 @@ class App3D {
         int selectedPiece = -1;
         LinkedListNode<int>** possibleMoves = nullptr;
 
+        int player0pawns;
+        int player0bishops;
+        int player0knights;
+        int player0rooks;
+        int player0queens;
+        int player1pawns;
+        int player1bishops;
+        int player1knights;
+        int player1rooks;
+        int player1queens;
+
         void initBoard();
         void printBoard( piece_t* board );
+        void updatePieceAmounts();
         static LinkedListNode<int>** getPossibleMoves( piece_t* board ){
             LinkedListNode<int>** res = (LinkedListNode<int>**)calloc( sizeof( LinkedListNode<int>* ) , 8*8*8 );
             if ( res == nullptr ){
@@ -602,7 +615,7 @@ class App3D {
         };
         static void playPossibleMoveOnBoard( piece_t* board , int from , int to ){
             // remove enpas data
-            for ( int i = 0; i < 8*8; i++ ){ board[i].enpas = 0; };
+            for ( int i = 0; i < 8*8*8; i++ ){ board[i].enpas = 0; };
 
             // pawn special rules
             if ( board[from].piece == 1 ){
@@ -749,6 +762,8 @@ class App3D {
                         ((App3D*)This)->selectedPiece = -1;
 
                         ((App3D*)This)->currentPlayer = 1-((App3D*)This)->currentPlayer;
+
+                        ((App3D*)This)->updatePieceAmounts();
                         return;
                     };
                     
