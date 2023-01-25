@@ -1,1 +1,1 @@
-g++ src/main.cpp -static-libgcc -static-libstdc++ -l mingw32 -l SDL2main -l SDL2 -l "libpng16-16" -l zlib1 -l SDL2_image -o main.exe
+g++ src/main.cpp -static-libgcc -static-libstdc++ -l mingw32 -l SDL2main -l SDL2 -l "libpng16-16" -l zlib1 -l SDL2_image -o 3Dchess.exe
